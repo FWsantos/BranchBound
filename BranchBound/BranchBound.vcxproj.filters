@@ -21,9 +21,21 @@
     <ClCompile Include="BP.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BPSol.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BB.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BP.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BPSol.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BB.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
