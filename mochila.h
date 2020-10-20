@@ -10,7 +10,6 @@ class Mochila
 public:
 	Mochila();
 	Mochila(std::vector<std::vector<double>> peso_valor_, int capacidade_);
-	// ~mochila();
   int capacidade;
 	std::vector<std::vector<double>> peso_valor; // peso, valor, do item i
 	std::vector<double> x;

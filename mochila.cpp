@@ -8,7 +8,6 @@ Mochila::Mochila(std::vector<std::vector<double>> peso_valor_, int capacidade_):
 		peso_valor.push_back(peso_valor_[i]);
 		x.push_back(0);
 	}
-	// peso_valor = std::vector<std::vector<double>>(bp.n, std::vector<double>(2, 0));
 }
 
 bool Mochila::isViavel(){
