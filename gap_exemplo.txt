@@ -1,0 +1,145 @@
+Exemplo de branch-and-bound para o problema da mochila 0-1
+(A relaxação linear é resolvida com o algoritmo guloso para a versão fracionária, em que é possível colocar uma fração <= 1 de cada objeto.)
+
+max 45x1 + 48x2 + 35x3 + 51x4 + 21x5
+
+s.a
+
+5x1 + 8x2 + 3x3 + 5x4 + 3x5 <= 12
+
+*********************************************
+
+(45/5, 48/8, 35/3, 51/5, 21/3) = 
+
+= (9, 6, 11.66, 10.2, 7)
+
+Ordenando as razões benefício/custo (valor/peso):
+
+Nó 1 (raiz):
+
+([11.66;3], [10.2;4], [9;1], [7;5], [6;2])
+
+Resolvendo a relaxação linear (RL):
+
+x3=1, x4=1, x1=4/5, x5=x2=0 -> z = 86 + (4/5)*45 = 86 + 36 = 122
+
+Solução = (4/5, 0, 1, 1, 0)
+
+Dois filhos: [x1=0] e [x1=1]
+
+	Nó 2 [x1=0]:
+
+	([11.66;3], [10.2;4], [7;5], [6;2])
+
+	Resolvendo a RL:
+
+	x3=1, x4=1, x5=1, x2=1/8 -> z = 107 + (1/8)*48 = 113
+
+	Dois filhos: [x1=0 e x2=0] e [x1=0 e x2=1]
+
+		Nó 14 [x1=0 e x2=0]:
+
+		([11.66;3], [10.2;4], [7;5])
+
+		Resolvendo a RL:
+
+		x3=1, x4=1, x5=1 -> z = 107
+
+		Nó 15 [x1=0 e x2=1]:
+
+		Capacidade da mochila = 4
+
+		([11.66;3], [10.2;4], [7;5])
+
+		Resolvendo a RL:
+
+		x3=1, x4=1/5, x=5 -> z = 48 + 35 + (1/5)*51 = 83 + 10.2 = 93.2
+
+	Nó 3 [x1=1]:
+
+	Capacidade da mochila = 7
+
+	([11.66;3], [10.2;4], [7;5], [6;2])
+
+	x3=1, x4=4/5, x5=x2=0 -> z = 45 + 35 + (4/5)*51 = 120.8
+
+	Dois filhos: [x1=1 e x4=0] e [x1=1 e x4=1]
+
+		Nó 4 [x1=1 e x4=0]:
+
+		([11.66;3], [7;5], [6;2])
+
+		Resolvendo a RL:
+
+		x3=1, x5=1, x2=1/8 -> z = 45 + 56 + (1/8)*48 = 107
+
+		Dois filhos: [x1=1, x4=0 e x2=0] e [x1=1, x4=0 e x2=1]
+
+			Nó 12 [x1=1, x4=0 e x2=0]:
+
+			([11.66;3], [7;5])
+
+			Resolvendo a RL:
+
+			x3=1, x5=1 -> z = 45 + 35 + 21 = 101
+
+			Nó 13 [x1=1, x4=0 e x2=1]:
+
+			Capacidade da mochila = -1
+
+			Poda por inviabilidade.
+
+		Nó 5 [x1=1 e x4=1]:
+
+		Capacidade da mochila = 2
+
+		([11.66;3], [7;5], [6;2])
+
+		Resolvendo a RL:
+
+		x3=2/3, x5=x2=0 -> z = 96 + (2/3)*35 = 96 + 23.33 = 119.33
+
+		Dois filhos: [x1=1, x4=1 e x3=0] e [x1=1, x4=1 e x3=1]
+
+			Nó 6 [x1=1, x4=1 e x3=0]:
+
+			([7;5], [6;2])
+
+			Resolvendo a RL:
+
+			x5=2/3, x2=0 -> z = 96 + (2/3)*21 = 110
+
+			Dois filhos: [x1=1, x4=1, x3=0, x5=0] e [x1=1, x4=1, x3=0, x5=1]
+
+				Nó 8 [x1=1, x4=1, x3=0, x5=0]:
+
+				([6;2])
+
+				x2=1/4 -> z = 96 + (1/4)*48 = 108
+
+				Dois filhos: [x1=1, x4=1, x3=0, x5=0 e x2=0] e [x1=1, x4=1, x3=0, x5=0 e x2=1]
+
+					Nó 10: [x1=1, x4=1, x3=0, x5=0 e x2=0]
+
+					z = 96
+
+					Nó 11: [x1=1, x4=1, x3=0, x5=0 e x2=1]
+
+					Capacidade da mochila = -6
+
+					Poda por inviabilidade.
+
+				Nó 9 [x1=1, x4=1, x3=0, x5=1]:
+
+				Capacidade da mochila = -1 
+
+				Poda por inviabilidade.
+
+
+			Nó 7 [x1=1, x4=1 e x3=1]:
+
+			Capacidade da mochila = -1
+
+			Poda por inviabilidade.
+
+Busca completa.
